@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
-import os
+
+import os, boto3
 
 import aws_cdk as cdk
 
-from my_project.my_project_stack import MyProjectStack
+from my_project.constructs.my_project_stack import MyProjectStack
+from my_project.constructs.s3_construct import S3Stack
 
+#session = boto3.session.Session()
+#print(session.region_name)
 
 app = cdk.App()
-MyProjectStack(app, "MyProjectStack",
+
+S3Stack(app, "S3Stack")
+
+#MyProjectStack(app, "MyProjectStack",
+
     # If you don't specify 'env', this stack will be environment-agnostic.
     # Account/Region-dependent features and context lookups will not work,
     # but a single synthesized template can be deployed anywhere.
@@ -23,6 +31,7 @@ MyProjectStack(app, "MyProjectStack",
     #env=cdk.Environment(account='123456789012', region='us-east-1'),
 
     # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
-    )
+
+    #)
 
 app.synth()
